@@ -1,0 +1,14 @@
+<% if current_kitchencar%>
+  <%= form_with model: @micropost,  local: true do |f| %>
+    <div class="field">
+    <%= f.text_area :content%>
+    </div>
+    <%= f.submit "投稿", class: "btn btn-primary"%>
+  <% end%>
+<% end %>
+
+<% @microposts.each do |micropost| %>
+  <%= micropost.content %>
+  <%= link_to "編集",  edit_micropost_path(micropost) %>
+  <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？？？" } %>
+<% end %>
