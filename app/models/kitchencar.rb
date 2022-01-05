@@ -4,4 +4,5 @@ class Kitchencar < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many_attached :portraits
+  has_many :microposts, dependent: :destroy
 end

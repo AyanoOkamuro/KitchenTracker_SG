@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_004813) do
+ActiveRecord::Schema.define(version: 2022_01_05_023801) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 2022_01_05_004813) do
     t.index ["reset_password_token"], name: "index_kitchencars_on_reset_password_token", unique: true
   end
 
+  create_table "microposts", force: :cascade do |t|
+    t.text "content"
+    t.integer "kitchencar_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["kitchencar_id", "created_at"], name: "index_microposts_on_kitchencar_id_and_created_at"
+    t.index ["kitchencar_id"], name: "index_microposts_on_kitchencar_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "microposts", "kitchencars"
 end
