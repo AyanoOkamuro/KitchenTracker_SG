@@ -25,6 +25,11 @@
     <%= f.text_area :introduction, autofocus: true %>
   </div>
 
+  <span class="image">
+    <%= f.label :写真 %><br />
+    <%= f.file_field :portraits, multiple: true %>
+  </span>
+
   <div class="field">
     <%= f.label :パスワード %>
     <% if @minimum_password_length %>

@@ -7,4 +7,10 @@
 
   <div> 場所：</div>
   <%= @kitchencar.location %>
-</div>
+
+  <div>写真：</div>
+  <% if @kitchencar.portraits.attached? %>
+    <% @kitchencar.portraits.each do |portrait| %>
+      <%= image_tag portrait %>
+    <% end %>
+  <% end %></div>
