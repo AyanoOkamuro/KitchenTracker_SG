@@ -1,0 +1,26 @@
+<div class="container">
+  <div>名前：</div>
+  <%= @kitchencar.name %>
+
+  <div>説明：</div>
+  <%= @kitchencar.introduction %>
+
+  <div> 場所：</div>
+  <%= @kitchencar.location %>
+
+  <div>写真：</div>
+  <% if @kitchencar.portraits.attached? %>
+    <% @kitchencar.portraits.each do |portrait| %>
+      <%= image_tag portrait %>
+    <% end %>
+  <% end %>
+
+  <div class="col-md-8">
+    <% if @kitchencar.microposts.any? %>
+      <h3>Microposts (<%= @kitchencar.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+    <% end %>
+  </div>
+</div>

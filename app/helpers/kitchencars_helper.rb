@@ -1,0 +1,2 @@
+module KitchencarsHelper
+end
