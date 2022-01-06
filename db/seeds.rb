@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+10.times do |n|
+  Kitchencar.create(name: "#{n}人目", introduction: "#{n}人目だよ",
+                    location: "#{n}にいる", email: "#{n}@example.com",
+                    password: "password", password_confirmation: "password")
+end
+
+kitchencars = Kitchencar.order(:created_at).take(3)
