@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'homes#top'
+  root to: 'microposts#index'
 
   devise_for :kitchencars, controllers: {
     sessions: 'kitchencars/sessions',
