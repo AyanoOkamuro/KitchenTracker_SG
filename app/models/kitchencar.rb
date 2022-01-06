@@ -5,4 +5,5 @@ class Kitchencar < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many_attached :portraits
   has_many :microposts, dependent: :destroy
+  has_many :menus, dependent: :destroy
 end

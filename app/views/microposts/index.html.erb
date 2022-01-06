@@ -8,7 +8,10 @@
 <% end %>
 
 <% @microposts.each do |micropost| %>
+  <%= link_to micropost.kitchencar.name, kitchencar_path(micropost.kitchencar)%>
   <%= micropost.content %>
-  <%= link_to "編集",  edit_micropost_path(micropost) %>
-  <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？？？" } %>
+  <% if micropost.kitchencar == current_kitchencar %>
+    <%= link_to "編集",  edit_micropost_path(micropost) %>
+    <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？" } %>
+  <% end %>
 <% end %>
