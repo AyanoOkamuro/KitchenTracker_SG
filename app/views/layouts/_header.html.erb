@@ -1,6 +1,9 @@
 <%= link_to 'home', root_path %>
-<%= link_to "logout", destroy_kitchencar_session_path, method: :delete if current_kitchencar%>
-<%= link_to "sign up", new_kitchencar_registration_path if current_kitchencar%>
-<%= link_to "profile", kitchencar_path(current_kitchencar) if current_kitchencar%>
-<%= link_to "login", new_kitchencar_session_path %>
+<% if current_kitchencar %>
+  <%= link_to "logout", destroy_kitchencar_session_path, method: :delete %>
+  <%= link_to "profile", kitchencar_path(current_kitchencar) %>
+<% else %>
+  <%= link_to "sign up", new_kitchencar_registration_path %>
+  <%= link_to "login", new_kitchencar_session_path %>
+<% end %>
 <%= link_to "post", microposts_path %>

@@ -1,0 +1,9 @@
+<%= link_to "メニュー作成", new_kitchencar_menu_path if current_kitchencar %>
+
+<% @menus.each do |menu| %>
+  <%= menu.name %>
+  <%= menu.description %>
+  <%= menu.price %>
+  <%= link_to "編集", edit_kitchencar_menu_path(current_kitchencar, menu) %>
+  <%= link_to "削除", kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" } %>
+<%end%>
