@@ -42,7 +42,7 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:name, :description, :price)
+    params.require(:menu).permit(:name, :description, :price, :image)
   end
 
   def correct_user

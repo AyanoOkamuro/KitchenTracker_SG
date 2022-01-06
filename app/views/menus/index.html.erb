@@ -2,6 +2,7 @@
 
 <% @menus.each do |menu| %>
   <%= menu.name %>
+  <%= image_tag menu.image.variant(resize: '100x100').processed if menu.image.attached? %>
   <%= menu.description %>
   <%= menu.price %>
   <%= link_to "編集", edit_kitchencar_menu_path(current_kitchencar, menu) %>
