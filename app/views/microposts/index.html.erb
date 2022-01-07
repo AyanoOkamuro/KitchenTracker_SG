@@ -3,10 +3,8 @@
     <%= render 'shared/error_messages', object: f.object %>
     <div class="field">
      <%= f.text_area :content%>
-      <% if @micropost.errors.any? %>
-        <% errors_hash(@micropost)[:content].each do |error_msg| %>
-          <p class="text-xs text-danger"><%= error_msg %></p>
-        <% end %>
+      <% errors_hash(@micropost, :content).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
       <% end %>
     </div>
     <div class="image">

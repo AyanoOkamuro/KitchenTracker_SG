@@ -16,7 +16,7 @@ class MenusController < ApplicationController
   end
 
   def index
-    @menus = Menu.all
+    @menus = Menu.where(kitchencar_id: params[:kitchencar_id])
   end
 
   def edit

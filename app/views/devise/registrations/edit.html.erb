@@ -1,36 +1,30 @@
 <h2><%= t('.title', resource: resource.model_name.human) %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_with model: @kitchencar, url: kitchencar_registration_path, local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-    <% if resource.errors.any? %>
-      <% errors_hash(resource)[:name].each do |error_msg| %>
-          <p class="text-xs text-danger"><%= error_msg %></p>
-        <% end %>
-    <% end %>
+      <% errors_hash(resource, :name).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    <% if resource.errors.any? %>
-      <% errors_hash(resource)[:name].each do |error_msg| %>
+      <% errors_hash(resource, :email).each do |error_msg| %>
         <p class="text-xs text-danger"><%= error_msg %></p>
       <% end %>
-    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :location %><br />
     <%= f.text_field :location, autofocus: true %>
-    <% if resource.errors.any? %>
-      <% errors_hash(resource)[:name].each do |error_msg| %>
+      <% errors_hash(resource, :location).each do |error_msg| %>
         <p class="text-xs text-danger"><%= error_msg %></p>
       <% end %>
-    <% end %>
   </div>
 
   <div class="field">
