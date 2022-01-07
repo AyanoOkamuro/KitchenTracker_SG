@@ -1,6 +1,12 @@
  <%= form_with model: @micropost, local: true do |f| %>
-    <div class="field">
+   <%= render 'shared/error_messages', object: f.object %>
+   <div class="field">
     <%= f.text_area :content%>
+     <% if @micropost.errors.any? %>
+       <% errors_hash(@micropost)[:content].each do |error_msg| %>
+         <p class="text-xs text-danger"><%= error_msg %></p>
+       <% end %>
+     <% end %>
     </div>
    <div class="image">
      <%= f.label :image %><br />

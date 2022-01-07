@@ -25,8 +25,22 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        name: 店名
+        location: 場所
+        introduction: 説明
+        image: 画像
+      micropost:
+        content: 内容
+        image: 画像
+      menu:
+        name: メニュー名
+        price: 価格
+        image: 画像
+        description: 説明
     models:
       kitchencar: キッチンカー
+      micropost: 投稿
+      menu: メニュー
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -140,4 +154,4 @@ ja:
       not_locked: はロックされていません。
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
-        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+        other: "%{count} 件のエラーがあります。"

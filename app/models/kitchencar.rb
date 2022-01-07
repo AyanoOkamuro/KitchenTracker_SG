@@ -6,4 +6,6 @@ class Kitchencar < ApplicationRecord
   has_many_attached :portraits
   has_many :microposts, dependent: :destroy
   has_many :menus, dependent: :destroy
+  validates :name, presence: true
+  validates :location, presence: true
 end
