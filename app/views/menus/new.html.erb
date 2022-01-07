@@ -3,10 +3,8 @@
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-    <% if @menu.errors.any? %>
-      <% errors_hash(@menu)[:name].each do |error_msg| %>
-        <p class="text-xs text-danger"><%= error_msg %></p>
-      <% end %>
+    <% errors_hash(@menu, :name).each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
     <% end %>
   </div>
 
@@ -17,11 +15,9 @@
 
   <div class="field">
     <%= f.label :price %><br />
-    <%= f.text_field :price, autofocus: true %>
-    <% if @menu.errors.any? %>
-      <% errors_hash(@menu)[:price].each do |error_msg| %>
-        <p class="text-xs text-danger"><%= error_msg %></p>
-      <% end %>
+    <%= f.text_field :price, autofocus: true %>円
+    <% errors_hash(@menu, :price).each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
     <% end %>
   </div>
 

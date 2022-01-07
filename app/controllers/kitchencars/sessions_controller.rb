@@ -11,7 +11,6 @@ class Kitchencars::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    flash.now[:danger]
   end
 
   # DELETE /resource/sign_out
