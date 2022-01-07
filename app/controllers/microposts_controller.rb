@@ -12,8 +12,8 @@ class MicropostsController < ApplicationController
       flash[:success] = "つぶやきました!"
       redirect_to microposts_path
     else
-      flash.now[:alart] = "つぶやけませんでした!"
-      render 'homes/top'
+      @microposts = Micropost.all
+      render 'microposts/index'
     end
   end
 
@@ -25,8 +25,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "更新しました!"
       redirect_to microposts_path
     else
-      flash.now[:alart] = "更新できませんでした!"
-      render 'homes/top'
+      render 'microposts/edit'
     end
   end
 

@@ -11,8 +11,7 @@ class MenusController < ApplicationController
       flash[:success] = "メニューを作成しました"
       redirect_to kitchencar_menus_path
     else
-      flash.now[:alart] = "メニューを作成できませんでした"
-      render 'homes/top'
+      render 'menus/new'
     end
   end
 
@@ -28,8 +27,7 @@ class MenusController < ApplicationController
       flash[:success] = "更新しました!"
       redirect_to kitchencar_menus_path
     else
-      flash.now[:alart] = "更新できませんでした!"
-      render 'homes/top'
+      render 'menus/edit'
     end
   end
 

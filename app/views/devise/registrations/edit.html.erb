@@ -6,16 +6,31 @@
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <% if resource.errors.any? %>
+      <% errors_hash(resource)[:name].each do |error_msg| %>
+          <p class="text-xs text-danger"><%= error_msg %></p>
+        <% end %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% if resource.errors.any? %>
+      <% errors_hash(resource)[:name].each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :area %><br />
+    <%= f.label :location %><br />
     <%= f.text_field :location, autofocus: true %>
+    <% if resource.errors.any? %>
+      <% errors_hash(resource)[:name].each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="field">

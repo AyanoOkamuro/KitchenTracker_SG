@@ -1,7 +1,13 @@
 <%= form_with model:@menu,url: kitchencar_menus_path, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <% if @menu.errors.any? %>
+      <% errors_hash(@menu)[:name].each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    <% end %>
   </div>
 
    <div class="field">
@@ -12,6 +18,11 @@
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price, autofocus: true %>
+    <% if @menu.errors.any? %>
+      <% errors_hash(@menu)[:price].each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="image">
