@@ -1,10 +1,13 @@
 <% if current_kitchencar%>
   <%= form_with model: @micropost,  local: true do |f| %>
     <div class="field">
-    <%= f.text_area :content%>
+     <%= f.text_area :content%>
+    </div>
+    <div class="image">
+      <%= f.file_field :images, multiple: true %>
     </div>
     <%= f.submit "投稿", class: "btn btn-primary"%>
-  <% end%>
+  <% end %>
 <% end %>
 
 <table class="table">
@@ -16,6 +19,13 @@
         </th>
         <td>
           <%= micropost.content %>
+        </td>
+        <td>
+          <% if micropost.images.attached? %>
+            <% micropost.images.each do |image| %>
+              <%= image_tag image %>
+            <% end %>
+          <% end %>
         </td>
         <% if micropost.kitchencar == current_kitchencar %>
           <td>
