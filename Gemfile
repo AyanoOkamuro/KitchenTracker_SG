@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
 end
 
 group :development, :test do
@@ -68,4 +68,5 @@ gem 'devise-i18n'
 gem 'rails-i18n'
 
 gem 'image_processing'
+gem 'mini_magick'
 gem 'aws-sdk-s3'

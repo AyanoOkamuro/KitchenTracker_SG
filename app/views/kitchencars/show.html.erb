@@ -1,28 +1,60 @@
 <div class="container">
-  <div>名前：</div>
-  <%= @kitchencar.name %>
-
-  <div>説明：</div>
-  <%= @kitchencar.introduction %>
-
-  <div> 場所：</div>
-  <%= @kitchencar.location %>
-
-  <div>写真：</div>
-  <% if @kitchencar.portraits.attached? %>
-    <% @kitchencar.portraits.each do |portrait| %>
-      <%= image_tag portrait %>
-    <% end %>
-  <% end %>
-
-  <div class="col-md-8">
-    <% if @kitchencar.microposts.any? %>
-      <h3>Microposts (<%= @kitchencar.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-    <% end %>
-  </div>
-  <%= link_to "メニュー", kitchencar_menus_path(@kitchencar) %>
   <%= link_to "プロフィールを編集", edit_kitchencar_registration_path %>
+
+  <div id="Bootstrap__Header_Label" class="Bootstrap___Header_Label">
+	  <br>
+<button type="button" class="btn btn-primary btn-sm" style="background-color: #ec4a89;" href="#!" role="button">
+    <div id="Header_bt">
+		  <%= @kitchencar.location %>
+	  </div>
+</button>
+
+    <div id="Header">
+      <font size="6" face="Osaka">
+		    <%= @kitchencar.name %>
+      </font>
+    </div>
+      <svg height="4" width="800">
+      　<line x1="0" y1="2" x2="800" y2="2" style="stroke:rgb(0,0,0);stroke-width:2" />
+      </svg>
+
+
+      <div hidden>写真：</div>
+
+      <span class="portrait">
+       <% if @kitchencar.portraits.attached? %>
+         <% @kitchencar.portraits.each do |portrait| %>
+            <%= image_tag portrait.variant(resize_to_limit: [800, 800]) %>
+         <% end %>
+       <% end %>
+      </span>
+
+      <br>
+      <br>
+        <h4><b><%= @kitchencar.introduction %></b></h4>
+      </div>
+    <br>
+    <br>
+
+    <div style="text-align: [0, 0]">
+      <%=link_to(kitchencar_menus_path(@kitchencar)) do %>
+        <div  href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
+          <b>
+          メニューはこちら
+          </b>
+        </div>
+       <%end%>
+    </div>
+    
+      <div class="col-md-8">
+          <% if @kitchencar.microposts.any? %>
+            <h3>Microposts (<%= @kitchencar.microposts.count %>)</h3>
+            <ol class="microposts">
+              <%= render @microposts %>
+            </ol>
+          <% end %>
+      </div>
+    <br>
+    <br>
+  </div>
 </div>
