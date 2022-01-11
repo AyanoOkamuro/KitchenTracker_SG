@@ -1,47 +1,40 @@
-<% if current_kitchencar%>
-  <%= form_with model: @micropost,  local: true do |f| %>
+<% if current_kitchencar %>
+  <h4 class="text-center">新規投稿</h4>
+  <%= form_with model: @micropost, local: true do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <div class="field">
-     <%= f.text_area :content%>
+    <div class="field mb-4">
+      <%= f.text_area :content, class: 'form-control', :placeholder => '内容を入力' %>
       <% errors_hash(@micropost, :content).each do |error_msg| %>
         <p class="text-xs text-danger"><%= error_msg %></p>
       <% end %>
     </div>
-    <div class="image">
-      <%= f.file_field :images, multiple: true %>
+    <div class="image mb-3">
+      <%= f.file_field :images, multiple: true, class: 'form-control' %>
     </div>
-    <%= f.submit "投稿", class: "btn btn-primary"%>
+    <div class="text-center mb-4">
+      <%= f.submit "投稿", class: "btn btn-primary w-50" %>
+    </div>
   <% end %>
 <% end %>
 
-<table class="table">
+<div class="row row-cols-2 row-cols-md-3 g-4 mb-4">
   <% @microposts.each do |micropost| %>
-    <tbody>
-      <tr>
-        <th>
-          <%= link_to micropost.kitchencar.name, kitchencar_path(micropost.kitchencar)%>
-        </th>
-        <td>
-          <%= micropost.content %>
-        </td>
-        <td>
-          <% if micropost.images.attached? %>
-            <% micropost.images.each do |image| %>
-              <%= image_tag image %>
-            <% end %>
-          <% end %>
-        </td>
-        <% if micropost.kitchencar == current_kitchencar %>
-          <td>
-            <%= link_to "編集",  edit_micropost_path(micropost) %>
-          </td>
-          <td>
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag micropost.images[0].variant(resize: '1200x1000!').processed if micropost.images.attached? %>
+        <div class="card-body">
+          <%= link_to "#{micropost.kitchencar.name}", kitchencar_path(micropost.kitchencar.id) %>
+          <br/>
+          <p class="card-text">
+            <%= micropost.content %>
+          </p>
+          <%= time_ago_in_words(micropost.created_at) %> 前
+          <% if micropost.kitchencar == current_kitchencar %>
+            <%= link_to "編集", edit_micropost_path(micropost) %>
             <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？" } %>
-          </td>
-        <% else%>
-          <td colspan="2"></td>
-        <% end %>
-      </tr>
-    </tbody>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>

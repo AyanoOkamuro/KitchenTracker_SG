@@ -1,60 +1,89 @@
 <div class="container">
-  <%= link_to "プロフィールを編集", edit_kitchencar_registration_path %>
-
-  <div id="Bootstrap__Header_Label" class="Bootstrap___Header_Label">
-	  <br>
-<button type="button" class="btn btn-primary btn-sm" style="background-color: #ec4a89;" href="#!" role="button">
-    <div id="Header_bt">
-		  <%= @kitchencar.location %>
-	  </div>
-</button>
-
-    <div id="Header">
-      <font size="6" face="Osaka">
-		    <%= @kitchencar.name %>
-      </font>
-    </div>
-      <svg height="4" width="800">
-      　<line x1="0" y1="2" x2="800" y2="2" style="stroke:rgb(0,0,0);stroke-width:2" />
-      </svg>
-
-
-      <div hidden>写真：</div>
-
-      <span class="portrait">
-       <% if @kitchencar.portraits.attached? %>
-         <% @kitchencar.portraits.each do |portrait| %>
-            <%= image_tag portrait.variant(resize_to_limit: [800, 800]) %>
-         <% end %>
-       <% end %>
-      </span>
-
-      <br>
-      <br>
-        <h4><b><%= @kitchencar.introduction %></b></h4>
-      </div>
-    <br>
-    <br>
-
-    <div style="text-align: [0, 0]">
-      <%=link_to(kitchencar_menus_path(@kitchencar)) do %>
-        <div  href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
-          <b>
-          メニューはこちら
-          </b>
-        </div>
-       <%end%>
-    </div>
-    
-      <div class="col-md-8">
-          <% if @kitchencar.microposts.any? %>
-            <h3>Microposts (<%= @kitchencar.microposts.count %>)</h3>
-            <ol class="microposts">
-              <%= render @microposts %>
-            </ol>
-          <% end %>
-      </div>
-    <br>
-    <br>
+  <div class="mb-4">
+    <%= link_to "プロフィールを編集", edit_kitchencar_registration_path if current_kitchencar && params[:id] == current_kitchencar.id.to_s %>
   </div>
+
+  <div class="mb-3">
+    <span class=" border border-info rounded p-2 text-info ">
+        <%= @kitchencar.location %>
+    </span>
+  </div>
+
+  <div id="Header" class="border-bottom border-secondary mb-4">
+    <font size="5" face="Osaka">
+      <%= @kitchencar.name %>
+    </font>
+  </div>
+
+  <div hidden>写真：</div>
+
+  <div id="carouselExampleIndicators" class="carousel slide mb-5" data-mdb-ride="carousel">
+    <div class="carousel-inner">
+      <% if @kitchencar.portraits.attached? %>
+        <% @kitchencar.portraits.each_with_index do |portrait, i| %>
+          <% if i == 0 %>
+            <div class="carousel-item active">
+              <%= image_tag portrait.variant(resize: "500x300!").processed, class: 'd-block w-100 img-responsive' %>
+            </div>
+          <% else %>
+            <div class="carousel-item">
+              <%= image_tag portrait.variant(resize: "500x300!").processed, class: 'd-block w-100 img-responsive' %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-mdb-target="#carouselExampleIndicators"
+      data-mdb-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-mdb-target="#carouselExampleIndicators"
+      data-mdb-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <h4 class="mb-6"><b><%= @kitchencar.introduction %></b></h4>
+
+  <div style="text-align: [0, 0]" class="mb-4">
+    <%= link_to(kitchencar_menus_path(@kitchencar)) do %>
+      <div href="#" class="btn btn-primary btn-sm" role="button" aria-pressed="true">
+        メニューはこちら
+      </div>
+    <% end %>
+  </div>
+
+  <% if @kitchencar.microposts.any? %>
+    <h4>投稿 (<%= @kitchencar.microposts.count %>)</h4>
+    <div class="row row-cols-2 row-cols-md-3 g-4 mb-4">
+      <% @microposts.each do |micropost| %>
+        <div class="col">
+          <div class="card h-100">
+            <%= image_tag micropost.images[0].variant(resize: '1200x1000!').processed if micropost.images.attached? %>
+            <div class="card-body">
+              <br/>
+              <p class="card-text">
+                <%= micropost.content %>
+              </p>
+              <%= time_ago_in_words(micropost.created_at) %> 前
+              <% if micropost.kitchencar == current_kitchencar %>
+                <%= link_to "編集", edit_micropost_path(micropost) %>
+                <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？" } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
