@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     registrations: 'kitchencars/registrations',
   }
 
-  resources :kitchencars, only: [:show] do
+  resources :kitchencars, only: [:show, :index] do
     resources :menus, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 
