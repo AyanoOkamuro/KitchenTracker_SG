@@ -1,14 +1,17 @@
- <%= form_with model: @micropost, local: true do |f| %>
-   <%= render 'shared/error_messages', object: f.object %>
-   <div class="field">
-    <%= f.text_area :content%>
-       <% errors_hash(@micropost, :content).each do |error_msg| %>
-         <p class="text-xs text-danger"><%= error_msg %></p>
-       <% end %>
-    </div>
-   <div class="image">
-     <%= f.label :image %><br />
-     <%= f.file_field :images, multiple: true %>
-   </div>
-    <%= f.submit "更新", class: "btn btn-primary"%>
-  <% end%>
+<%= form_with model: @micropost, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field mb-4">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' %>
+    <% errors_hash(@micropost, :content).each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+    <% end %>
+  </div>
+  <div class="image mb-4">
+    <%= f.label :image %><br/>
+    <%= f.file_field :images, multiple: true, class: 'form-control' %>
+  </div>
+  <div class="text-center mb-4">
+    <%= f.submit "更新", class: "btn btn-primary w-50" %>
+  </div>
+<% end %>
