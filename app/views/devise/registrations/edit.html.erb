@@ -61,6 +61,17 @@
 
 <br>
 
+  <div class="image mb-3 row">
+    <label for="inputtext" class="col-sm-2 col-form-label">写真</label>
+    <div class="col-sm-10">
+
+      <div class="field">
+        <%= f.file_field :portraits, multiple: true %>
+      </div>
+    </div>
+  </div>
+
+  <br />
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
   <% end %>
