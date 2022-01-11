@@ -1,10 +1,24 @@
-<%= link_to "メニュー作成", new_kitchencar_menu_path if current_kitchencar %>
-
-<% @menus.each do |menu| %>
-  <%= menu.name %>
-  <%= image_tag menu.image.variant(resize: '100x100').processed if menu.image.attached? %>
-  <%= menu.description %>
-  <%= menu.price %>
-  <%= link_to "編集", edit_kitchencar_menu_path(current_kitchencar, menu) if current_kitchencar %>
-  <%= link_to "削除", kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" }  if current_kitchencar %>
-<%end%>
+<div class="mb-4">
+  <%= link_to "メニュー作成", new_kitchencar_menu_path if current_kitchencar && params[:kitchencar_id] == current_kitchencar.id.to_s %>
+</div>
+<div class="row row-cols-2 row-cols-md-3 g-4 mb-4">
+  <% @menus.each do |menu| %>
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag menu.image.variant(resize: '1200x1000!').processed if menu.image.attached? %>
+        <div class="card-body">
+          <font size="4" face="Osaka">
+            <%= menu.name %>
+          </font>
+          <%= menu.price %>円
+          <br/>
+          <p class="card-text">
+            <%= menu.description %>
+          </p>
+          <%= link_to "編集", edit_kitchencar_menu_path(current_kitchencar, menu) if current_kitchencar %>
+          <%= link_to "削除", kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" } if current_kitchencar %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
