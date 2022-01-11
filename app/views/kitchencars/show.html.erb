@@ -75,6 +75,7 @@
               <p class="card-text">
                 <%= micropost.content %>
               </p>
+              <%= time_ago_in_words(micropost.created_at) %> 前
               <% if micropost.kitchencar == current_kitchencar %>
                 <%= link_to "編集", edit_micropost_path(micropost) %>
                 <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？" } %>
