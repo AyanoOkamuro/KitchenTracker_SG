@@ -1,0 +1,111 @@
+<% if current_kitchencar %>
+  <h4 class="text-center">新規投稿</h4>
+  <%= form_with model: @micropost, local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="field mb-4">
+      <%= f.text_area :content, class: 'form-control', :placeholder => '内容を入力' %>
+      <% errors_hash(@micropost, :content).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+    <div class="image mb-3">
+      <%= f.file_field :images, multiple: true, class: 'form-control' %>
+    </div>
+
+    <div class="w-100">
+
+      <div class="text-center mb-4">
+        <input id="address" type="textbox" value="東京" class="w-25">
+        <input type="button" class="btn btn-success" value="検索" onclick="codeAddress()">
+      </div>
+
+      <div id='map' class="center-block mb-4"></div>
+
+      <style>
+          #map {
+              height: 600px;
+              width: 600px;
+          }
+      </style>
+
+      <script>
+          let map
+          let marker
+
+          function initMap() {
+              geocoder = new google.maps.Geocoder()
+
+              map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: 35.6803997, lng: 139.7690174},
+                  zoom: 15,
+              });
+
+              marker = create_marker({
+                  position: {lat: 35.6803997, lng: 139.7690174},
+                  map: map,
+                  draggable: true
+              });
+              google.maps.event.addListener(marker, 'dragend', function (ev) {
+                  // イベントの引数evの、プロパティ.latLngが緯度経度。
+                  document.getElementById('lat').value = ev.latLng.lat();
+                  document.getElementById('lng').value = ev.latLng.lng();
+              });
+          }
+
+          // ここから追加
+          let geocoder
+
+          function deleteMakers() {
+              if (marker != null) {
+                  marker.setMap(null);
+              }
+              marker = null;
+          }
+
+          function codeAddress() {
+              let inputAddress = document.getElementById('address').value;
+
+              geocoder.geocode({'address': inputAddress}, function (results, status) {
+                  if (status == 'OK') {
+                      deleteMakers();
+                      map.setCenter(results[0].geometry.location);
+                      marker = create_marker({
+                          map: map,
+                          position: results[0].geometry.location,
+                          draggable: true,
+                      });
+                      document.getElementById('lat').value = marker.position.lat();
+                      document.getElementById('lng').value = marker.position.lng();
+                      google.maps.event.addListener(marker, 'dragend', function (ev) {
+                          // イベントの引数evの、プロパティ.latLngが緯度経度。
+                          document.getElementById('lat').value = ev.latLng.lat();
+                          document.getElementById('lng').value = ev.latLng.lng();
+                      });
+                  } else {
+                      alert('該当する結果がありませんでした：' + status);
+                  }
+              });
+          }
+
+          function create_marker(options) {
+              let m = new google.maps.Marker(options);
+              return m;
+          }
+
+          // ここまで追加
+      </script>
+      <div class="field hidden">
+        <%= f.label :緯度 %>
+        <%= f.text_field :latitude, id: 'lat' %>
+        <%= f.label :経度 %>
+        <%= f.text_field :longitude, id: 'lng' %>
+      </div>
+    </div>
+    <div class="text-center my-5">
+      <%= f.submit "投稿", class: "btn btn-primary w-50" %>
+    </div>
+  <% end %>
+<% end %>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvScZmKSH2udfTIxKfRvJkeEV_4r7aJVM&callback=initMap" async defer></script>
+

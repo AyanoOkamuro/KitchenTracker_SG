@@ -1,0 +1,108 @@
+<div class="container">
+  <div hidden>写真：</div>
+
+  <div id="carouselExampleIndicators" class="carousel slide mb-5 w-75 center-block" data-mdb-ride="carousel">
+    <div class="carousel-inner">
+      <% if @micropost.images.attached? %>
+        <% @micropost.images.each_with_index do |portrait, i| %>
+          <% if i == 0 %>
+            <div class="carousel-item active">
+              <%= image_tag portrait.variant(resize: "500x300!").processed, class: 'd-block w-100 img-responsive' %>
+            </div>
+          <% else %>
+            <div class="carousel-item">
+              <%= image_tag portrait.variant(resize: "500x300!").processed, class: 'd-block w-100 img-responsive' %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-mdb-target="#carouselExampleIndicators"
+      data-mdb-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-mdb-target="#carouselExampleIndicators"
+      data-mdb-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="d-flex border-bottom border-secondary mb-4 w-75 center-block justify-content-between">
+    <div>
+      <font size="5" face="Osaka">
+      <%= link_to @micropost.kitchencar.name, kitchencar_path(@micropost.kitchencar) %>
+    </font>
+    </div>
+    <div>
+      <% if @micropost.kitchencar == current_kitchencar %>
+        <%= link_to "編集", edit_micropost_path(@micropost) %>
+        <%= link_to "削除", micropost_path(@micropost), method: :delete, data: { confirm: "削除しますか？" } %>
+      <% end %>
+    </div>
+  </div>
+
+  <h4 class="mb-5 w-75 center-block"><%= @micropost.content %></h4>
+
+  <% if @micropost.latitude %>
+    <div class="text-center mt-5"><strong>お店の場所はこちら！</strong></div>
+    <div id='map' class="center-block mb-4"></div>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 600px;
+        }
+    </style>
+
+    <script>
+        let map
+        let marker
+
+        function initMap() {
+            geocoder = new google.maps.Geocoder()
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: <%= @micropost.latitude %>, lng: <%= @micropost.longitude %>},
+                zoom: 15,
+            });
+
+            marker = create_marker({
+                position: {lat: <%= @micropost.latitude %>, lng: <%= @micropost.longitude %>},
+                map: map,
+                draggable: true
+            });
+            google.maps.event.addListener(marker, 'dragend', function (ev) {
+                // イベントの引数evの、プロパティ.latLngが緯度経度。
+                document.getElementById('lat').value = ev.latLng.lat();
+                document.getElementById('lng').value = ev.latLng.lng();
+            });
+        }
+
+        function deleteMakers() {
+            if (marker != null) {
+                marker.setMap(null);
+            }
+            marker = null;
+        }
+
+        function create_marker(options) {
+            let m = new google.maps.Marker(options);
+            return m;
+        }
+
+        // ここまで追加
+    </script>
+  <% end %>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvScZmKSH2udfTIxKfRvJkeEV_4r7aJVM&callback=initMap" async defer></script>
