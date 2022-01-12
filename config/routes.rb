@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     resources :menus, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 
-  resources :microposts, only: [:index, :create, :edit, :update, :destroy]
+  resources :microposts, only: [:index, :create, :edit, :show, :update, :destroy]
 end

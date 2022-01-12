@@ -17,6 +17,10 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def show
+    @micropost = Micropost.find_by(id: params[:id])
+  end
+
   def edit
   end
 
@@ -38,7 +42,7 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, images: [])
+    params.require(:micropost).permit(:content, :latitude, :longitude, images: [])
   end
 
   def correct_user
