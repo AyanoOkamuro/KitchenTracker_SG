@@ -11,7 +11,90 @@
     <%= f.label :image %><br/>
     <%= f.file_field :images, multiple: true, class: 'form-control' %>
   </div>
+
+  <div class="text-center mb-4">
+    <input id="address" type="textbox" placeholder="場所を入力してください" class="w-25">
+    <input type="button" class="btn btn-success" value="検索" onclick="codeAddress()">
+  </div>
+  <div id='map' class="center-block mb-4"></div>
+
+  <style>
+      #map {
+          height: 400px;
+          width: 600px;
+      }
+  </style>
+
+  <script>
+      let map
+      let marker
+
+      function initMap() {
+          geocoder = new google.maps.Geocoder()
+
+          map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: <%= @micropost.latitude || 35.6803997 %>, lng: <%= @micropost.longitude || 139.7690174 %>},
+              zoom: 15
+          });
+
+          marker = create_marker({
+              position: {lat: <%= @micropost.latitude || 35.6803997 %>, lng: <%= @micropost.longitude || 139.7690174 %>},
+              map: map,
+              draggable: true
+          });
+          google.maps.event.addListener(marker, 'dragend', function (ev) {
+              document.getElementById('lat').value = ev.latLng.lat();
+              document.getElementById('lng').value = ev.latLng.lng();
+          });
+      }
+
+      let geocoder
+
+      function deleteMakers() {
+          if (marker != null) {
+              marker.setMap(null);
+          }
+          marker = null;
+      }
+
+      function codeAddress() {
+          let inputAddress = document.getElementById('address').value;
+
+          geocoder.geocode({'address': inputAddress}, function (results, status) {
+              if (status == 'OK') {
+                  deleteMakers();
+                  map.setCenter(results[0].geometry.location);
+                  marker = create_marker({
+                      map: map,
+                      position: results[0].geometry.location,
+                      draggable: true,
+                  });
+                  document.getElementById('lat').value = marker.position.lat();
+                  document.getElementById('lng').value = marker.position.lng();
+                  google.maps.event.addListener(marker, 'dragend', function (ev) {
+                      document.getElementById('lat').value = ev.latLng.lat();
+                      document.getElementById('lng').value = ev.latLng.lng();
+                  });
+              } else {
+                  alert('該当する結果がありませんでした：' + status);
+              }
+          });
+      }
+
+      function create_marker(options) {
+          let m = new google.maps.Marker(options);
+          return m;
+      }
+  </script>
+  <div class="field hidden">
+    <%= f.label :緯度 %>
+    <%= f.text_field :latitude, id: 'lat' %>
+    <%= f.label :経度 %>
+    <%= f.text_field :longitude, id: 'lng' %>
+  </div>
   <div class="text-center mb-4">
     <%= f.submit "更新", class: "btn btn-primary w-50" %>
   </div>
 <% end %>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

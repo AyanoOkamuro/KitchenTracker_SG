@@ -73,7 +73,7 @@
 
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: <%= @micropost.latitude %>, lng: <%= @micropost.longitude %>},
-                zoom: 15,
+                zoom: 15
             });
 
             marker = create_marker({
@@ -82,7 +82,6 @@
                 draggable: true
             });
             google.maps.event.addListener(marker, 'dragend', function (ev) {
-                // イベントの引数evの、プロパティ.latLngが緯度経度。
                 document.getElementById('lat').value = ev.latLng.lat();
                 document.getElementById('lng').value = ev.latLng.lng();
             });
@@ -99,8 +98,6 @@
             let m = new google.maps.Marker(options);
             return m;
         }
-
-        // ここまで追加
     </script>
   <% end %>
 </div>
