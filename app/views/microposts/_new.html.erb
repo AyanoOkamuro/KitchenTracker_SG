@@ -2,29 +2,32 @@
   <h4 class="text-center">新規投稿</h4>
   <%= form_with model: @micropost, local: true do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <div class="field mb-4">
+    <div class="field mb-4 w-75 center-block">
       <%= f.text_area :content, class: 'form-control', :placeholder => '内容を入力' %>
       <% errors_hash(@micropost, :content).each do |error_msg| %>
         <p class="text-xs text-danger"><%= error_msg %></p>
       <% end %>
     </div>
-    <div class="image mb-3">
+    <div class="image mb-3 w-75 center-block">
       <%= f.file_field :images, multiple: true, class: 'form-control' %>
     </div>
 
     <div class="w-100">
 
       <div class="text-center mb-4">
-        <input id="address" type="textbox" value="東京" class="w-25">
+        <input id="address" type="textbox" placeholder="場所を入力してください" class="w-25">
         <input type="button" class="btn btn-success" value="検索" onclick="codeAddress()">
+        <% if errors_hash(@micropost, :latitude) != [] %>
+          <p class="text-xs text-danger">位置を指定してください</p>
+        <% end %>
       </div>
 
       <div id='map' class="center-block mb-4"></div>
 
       <style>
           #map {
-              height: 600px;
-              width: 600px;
+              width: 70%;
+              padding: 0 0 50%;
           }
       </style>
 
@@ -36,23 +39,21 @@
               geocoder = new google.maps.Geocoder()
 
               map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: 35.6803997, lng: 139.7690174},
-                  zoom: 15,
+                  center: {lat: <%= current_kitchencar.microposts.first.latitude %>, lng: <%= current_kitchencar.microposts.first.longitude %>},
+                  zoom: 15
               });
 
               marker = create_marker({
-                  position: {lat: 35.6803997, lng: 139.7690174},
+                  position: {lat: <%= current_kitchencar.microposts.first.latitude %>, lng: <%= current_kitchencar.microposts.first.longitude %>},
                   map: map,
                   draggable: true
               });
               google.maps.event.addListener(marker, 'dragend', function (ev) {
-                  // イベントの引数evの、プロパティ.latLngが緯度経度。
                   document.getElementById('lat').value = ev.latLng.lat();
                   document.getElementById('lng').value = ev.latLng.lng();
               });
           }
 
-          // ここから追加
           let geocoder
 
           function deleteMakers() {
@@ -77,7 +78,6 @@
                       document.getElementById('lat').value = marker.position.lat();
                       document.getElementById('lng').value = marker.position.lng();
                       google.maps.event.addListener(marker, 'dragend', function (ev) {
-                          // イベントの引数evの、プロパティ.latLngが緯度経度。
                           document.getElementById('lat').value = ev.latLng.lat();
                           document.getElementById('lng').value = ev.latLng.lng();
                       });
@@ -91,8 +91,6 @@
               let m = new google.maps.Marker(options);
               return m;
           }
-
-          // ここまで追加
       </script>
       <div class="field hidden">
         <%= f.label :緯度 %>
@@ -102,7 +100,7 @@
       </div>
     </div>
     <div class="text-center my-5">
-      <%= f.submit "投稿", class: "btn btn-primary w-50" %>
+      <%= f.submit "投稿", class: "btn btn-primary w-25" %>
     </div>
   <% end %>
 <% end %>

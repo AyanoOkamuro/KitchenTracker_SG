@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="mb-4">
+  <div class="mb-4 text-right">
     <%= link_to "プロフィールを編集", edit_kitchencar_registration_path if current_kitchencar && params[:id] == current_kitchencar.id.to_s %>
   </div>
 
@@ -55,12 +55,8 @@
 
   <h4 class="mb-6"><b><%= @kitchencar.introduction %></b></h4>
 
-  <div style="text-align: [0, 0]" class="mb-4">
-    <%= link_to(kitchencar_menus_path(@kitchencar)) do %>
-      <div href="#" class="btn btn-primary w-25" role="button" aria-pressed="true">
-        メニューはこちら
-      </div>
-    <% end %>
+  <div class="mb-4">
+    <%= link_to 'メニューはこちら', kitchencar_menus_path(@kitchencar), class: 'btn btn-primary' %>
   </div>
 
   <% if @kitchencar.microposts.any? %>
@@ -69,17 +65,28 @@
       <% @microposts.each do |micropost| %>
         <div class="col">
           <div class="card h-100">
-            <%= image_tag micropost.images[0].variant(resize: '1200x1000!').processed if micropost.images.attached? %>
+            <%= link_to micropost_path(micropost) do %>
+              <% if micropost.images.attached? %>
+                <%= image_tag micropost.images[0].variant(resize: '1200x1000!').processed, class: 'card-img-top' %>
+              <% else %>
+                <%= image_tag "no_image.jpg", class: 'card-img-top' %>
+              <% end %>
+            <% end %>
             <div class="card-body">
-              <br/>
-              <p class="card-text">
+              <p class="card-text" style="font-size: 18px;">
                 <%= micropost.content %>
               </p>
               <%= time_ago_in_words(micropost.created_at) %>前
-              <% if micropost.kitchencar == current_kitchencar %>
-                <%= link_to "編集", edit_micropost_path(micropost) %>
-                <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？" } %>
-              <% end %>
+              <span class="mx-3">
+                <% if micropost.kitchencar == current_kitchencar %>
+                  <%= link_to edit_micropost_path(micropost), class: 'text-dark' do %>
+                    <i class="far fa-edit fa-lg"></i>
+                  <% end %>
+                  <%= link_to micropost_path(micropost), method: :delete, class: 'text-dark', data: { confirm: "削除しますか？" } do %>
+                    <i class="far fa-trash-alt fa-lg"></i>
+                  <% end %>
+                <% end %>
+              </span>
             </div>
           </div>
         </div>

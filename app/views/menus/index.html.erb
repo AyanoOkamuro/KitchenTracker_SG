@@ -1,22 +1,37 @@
 <div class="mb-4">
-  <%= link_to "メニュー作成", new_kitchencar_menu_path if current_kitchencar && params[:kitchencar_id] == current_kitchencar.id.to_s %>
+  <% if current_kitchencar && params[:kitchencar_id] == current_kitchencar.id.to_s %>
+    <%= link_to "メニュー作成", new_kitchencar_menu_path %>
+  <% else %>
+    <%= link_to '戻る', kitchencar_path(params[:kitchencar_id]) %>
+  <% end %>
 </div>
 <div class="row row-cols-2 row-cols-md-3 g-4 mb-4">
   <% @menus.each do |menu| %>
     <div class="col">
       <div class="card h-100">
-        <%= image_tag menu.image.variant(resize: '1200x1000!').processed if menu.image.attached? %>
+        <% if menu.image.attached? %>
+          <%= image_tag menu.image.variant(resize: '1200x1000!').processed, class: 'card-img-top' %>
+        <% else %>
+          <%= image_tag "no_image.jpg", class: 'card-img-top' %>
+        <% end %>
         <div class="card-body">
-          <font size="4" face="Osaka">
+          <div class="card-title" style="font-size: 22px;">
             <%= menu.name %>
-          </font>
-          <%= menu.price %>円
-          <br/>
-          <p class="card-text">
+          </div>
+          <p class="card-text" style="font-size: 20px">
+            <%= menu.price %>円
+          </p>
+          <p class="card-text" style="font-size: 18px;">
             <%= menu.description %>
           </p>
-          <%= link_to "編集", edit_kitchencar_menu_path(current_kitchencar, menu) if current_kitchencar %>
-          <%= link_to "削除", kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" } if current_kitchencar %>
+          <% if current_kitchencar && params[:kitchencar_id] == current_kitchencar.id.to_s %>
+            <%= link_to edit_kitchencar_menu_path(current_kitchencar, menu) do%>
+              <i class="far fa-edit fa-lg text-dark"></i>
+            <% end %>
+            <%= link_to kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" } do %>
+              <i class="far fa-trash-alt fa-lg text-dark"></i>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>

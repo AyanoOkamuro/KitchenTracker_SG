@@ -127,6 +127,8 @@ ja:
       already_signed_out: 既にログアウト済みです。
       new:
         sign_in: ログイン
+        forgot_your_password: パスワードを忘れた方はこちら
+        sign_up: 新規登録
       signed_in: ログインしました。
       signed_out: ログアウトしました。
     shared:

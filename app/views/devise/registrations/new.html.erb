@@ -3,7 +3,7 @@
 <%= form_with model: @kitchencar, url: kitchencar_registration_path, local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control'%>
       <% errors_hash(resource,:name).each do |error_msg| %>
@@ -11,7 +11,7 @@
       <% end %>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'%>
       <% errors_hash(resource, :email).each do |error_msg| %>
@@ -19,7 +19,7 @@
       <% end %>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :location %><br />
     <%= f.text_field :location, autofocus: true, class: 'form-control'%>
       <% errors_hash(resource, :location).each do |error_msg| %>
@@ -27,17 +27,17 @@
       <% end %>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :introduction %><br />
     <%= f.text_area :introduction, autofocus: true, class: 'form-control' %>
   </div>
 
-  <div class="image mb-4">
+  <div class="image mb-4 w-75 center-block">
     <%= f.label :image %><br />
     <%= f.file_field :portraits, multiple: true, class: 'form-control'%>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :password %>
     <% if @minimum_password_length %>
       <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
@@ -48,7 +48,7 @@
       <% end %>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control mb-4' %>
       <% errors_hash(resource, :password_confirmation).each do |error_msg| %>
@@ -56,8 +56,8 @@
       <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit t('.sign_up'), class: 'btn btn-primary btn-block mb-4' %>
+  <div class="actions text-center">
+    <%= f.submit t('.sign_up'), class: 'btn btn-primary mb-4 w-25' %>
   </div>
 <% end %>
 
