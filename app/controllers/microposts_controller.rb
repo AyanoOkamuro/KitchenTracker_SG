@@ -3,7 +3,7 @@ class MicropostsController < ApplicationController
 
   def index
     @micropost = Micropost.new
-    @microposts = Micropost.all
+    @microposts = Micropost.page(params[:page]).per(15)
     if current_kitchencar
       @initial_latitude = if current_kitchencar.microposts.first
                            current_kitchencar.microposts.first.latitude
