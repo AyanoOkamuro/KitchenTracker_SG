@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">KitchenTracker</a>
+    <%= link_to 'KitchenTracker', root_path, class: 'navbar-brand' %>
     <button type="button" class="navbar-toggler justify-content-end" data-bs-toggle="collapse" data-bs-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
       <span class="fas fa-bars"></span>
     </button>
@@ -9,6 +9,9 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item active">
           <%= link_to 'home', root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'map', maps_path, class: "nav-link" %>
         </li>
         <% if current_kitchencar %>
           <li class="nav-item">

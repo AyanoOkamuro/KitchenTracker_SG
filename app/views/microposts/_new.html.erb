@@ -17,6 +17,9 @@
       <div class="text-center mb-4">
         <input id="address" type="textbox" placeholder="場所を入力してください" class="w-25">
         <input type="button" class="btn btn-success" value="検索" onclick="codeAddress()">
+        <% if errors_hash(@micropost, :latitude) != [] %>
+          <p class="text-xs text-danger">位置を指定してください</p>
+        <% end %>
       </div>
 
       <div id='map' class="center-block mb-4"></div>
@@ -36,12 +39,12 @@
               geocoder = new google.maps.Geocoder()
 
               map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: 35.6803997, lng: 139.7690174},
+                  center: {lat: <%= current_kitchencar.microposts.first.latitude %>, lng: <%= current_kitchencar.microposts.first.longitude %>},
                   zoom: 15
               });
 
               marker = create_marker({
-                  position: {lat: 35.6803997, lng: 139.7690174},
+                  position: {lat: <%= current_kitchencar.microposts.first.latitude %>, lng: <%= current_kitchencar.microposts.first.longitude %>},
                   map: map,
                   draggable: true
               });
@@ -89,7 +92,7 @@
               return m;
           }
       </script>
-      <div class="field">
+      <div class="field hidden">
         <%= f.label :緯度 %>
         <%= f.text_field :latitude, id: 'lat' %>
         <%= f.label :経度 %>

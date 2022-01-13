@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
 
   resources :microposts, only: [:index, :create, :edit, :show, :update, :destroy]
+  resources :maps, only: [:index]
 end
