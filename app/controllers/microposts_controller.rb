@@ -4,6 +4,18 @@ class MicropostsController < ApplicationController
   def index
     @micropost = Micropost.new
     @microposts = Micropost.all
+    if current_kitchencar
+      @initial_latitude = if current_kitchencar.microposts.first
+                           current_kitchencar.microposts.first.latitude
+                         else
+                           35.6803997
+                         end
+      @initial_longitude = if current_kitchencar.microposts.first
+                            current_kitchencar.microposts.first.longitude
+                          else
+                            139.7690174
+                           end
+    end
   end
 
   def create

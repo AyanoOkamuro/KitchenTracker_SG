@@ -39,12 +39,12 @@
               geocoder = new google.maps.Geocoder()
 
               map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: <%= current_kitchencar.microposts.first.latitude %>, lng: <%= current_kitchencar.microposts.first.longitude %>},
+                  center: {lat: <%= @initial_latitude %>, lng: <%= @initial_longitude %>},
                   zoom: 15
               });
 
               marker = create_marker({
-                  position: {lat: <%= current_kitchencar.microposts.first.latitude %>, lng: <%= current_kitchencar.microposts.first.longitude %>},
+                  position: {lat: <%= @initial_latitude %>, lng: <%= @initial_longitude %>},
                   map: map,
                   draggable: true
               });
