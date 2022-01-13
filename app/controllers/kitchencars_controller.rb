@@ -2,7 +2,8 @@ class KitchencarsController < ApplicationController
   before_action :exist_kitchencar, only: [:show]
 
   def show
-    @microposts = @kitchencar.microposts.page(params[:page]).per(15)
+    @microposts = @kitchencar.microposts.page(params[:page]).per(9)
+    @menus = Menu.where(kitchencar_id: params[:id])[0..2]
   end
 
   def index
