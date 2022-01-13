@@ -1,13 +1,13 @@
 <%= form_with model: @micropost, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :content %>
     <%= f.text_area :content, class: 'form-control' %>
     <% errors_hash(@micropost, :content).each do |error_msg| %>
       <p class="text-xs text-danger"><%= error_msg %></p>
     <% end %>
   </div>
-  <div class="image mb-4">
+  <div class="image mb-4 w-75 center-block">
     <%= f.label :image %><br/>
     <%= f.file_field :images, multiple: true, class: 'form-control' %>
   </div>
@@ -93,7 +93,7 @@
     <%= f.text_field :longitude, id: 'lng' %>
   </div>
   <div class="text-center mb-4">
-    <%= f.submit "更新", class: "btn btn-primary w-50" %>
+    <%= f.submit "更新", class: "btn btn-primary w-25" %>
   </div>
 <% end %>
 

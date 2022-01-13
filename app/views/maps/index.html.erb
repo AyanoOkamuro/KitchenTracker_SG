@@ -27,7 +27,7 @@
             });
             let infowindow = new google.maps.InfoWindow({
                 position: {lat: <%= micropost.latitude %>, lng: <%= micropost.longitude %>},
-                content: "<a href='<%= kitchencar_path(micropost.kitchencar.id) %>'><%= micropost.kitchencar.name %></a>"
+                content: "<a href='<%= kitchencar_path(micropost.kitchencar.id) %>' target=”_blank” rel=”noopener”><%= micropost.kitchencar.name %></a>"
             });
             marker.addListener('click', function() {
                 infowindow.open(map, marker);

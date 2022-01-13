@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="mb-4">
+  <div class="mb-4 text-right">
     <%= link_to "プロフィールを編集", edit_kitchencar_registration_path if current_kitchencar && params[:id] == current_kitchencar.id.to_s %>
   </div>
 
@@ -73,14 +73,20 @@
               <% end %>
             <% end %>
             <div class="card-body">
-              <p class="card-text">
+              <p class="card-text" style="font-size: 18px;">
                 <%= micropost.content %>
               </p>
               <%= time_ago_in_words(micropost.created_at) %>前
-              <% if micropost.kitchencar == current_kitchencar %>
-                <%= link_to "編集", edit_micropost_path(micropost) %>
-                <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "削除しますか？" } %>
-              <% end %>
+              <span class="mx-3">
+                <% if micropost.kitchencar == current_kitchencar %>
+                  <%= link_to edit_micropost_path(micropost), class: 'text-dark' do %>
+                    <i class="far fa-edit fa-lg"></i>
+                  <% end %>
+                  <%= link_to micropost_path(micropost), method: :delete, class: 'text-dark', data: { confirm: "削除しますか？" } do %>
+                    <i class="far fa-trash-alt fa-lg"></i>
+                  <% end %>
+                <% end %>
+              </span>
             </div>
           </div>
         </div>

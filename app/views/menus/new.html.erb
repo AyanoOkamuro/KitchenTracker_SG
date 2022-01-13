@@ -1,6 +1,6 @@
 <%= form_with model: @menu, url: kitchencar_menus_path, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control'%>
     <% if @menu.errors.any? %>
@@ -10,12 +10,12 @@
     <% end %>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :description %>
     <%= f.text_area :description, autofocus: true, class: 'form-control' %>
   </div>
 
-  <div class="field mb-4">
+  <div class="field mb-4 w-75 center-block">
     <%= f.label :price %>
     <%= f.text_field :price, autofocus: true, class: 'form-control' %>
     <% if @menu.errors.any? %>
@@ -25,12 +25,12 @@
     <% end %>
   </div>
 
-  <div class="image mb-4">
+  <div class="image mb-4 w-75 center-block">
     <%= f.label :image %><br />
     <%= f.file_field :image, class: 'form-control' %>
   </div>
 
   <div class="actions text-center mb-4">
-    <%= f.submit "作成", class: 'btn btn-primary w-50'%>
+    <%= f.submit "作成", class: 'btn btn-primary w-25'%>
   </div>
 <% end %>

@@ -1,69 +1,59 @@
 <%= link_to t('devise.shared.links.back'), :back %>
 
-<font face="osaka"><h3 class="text-center"><%= t('プロフィール編集') %></h3></font>
+<h3 class="text-center"><%= t('プロフィール編集') %></h3>
 
 <%= form_with model: @kitchencar, url: kitchencar_registration_path, local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-<br>
+  <br>
 
-  <div class="mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">店名</label>
-    <div class="col-sm-10">
+  <div class="mb-5 w-75 center-block">
+    <label for="inputtext">店名</label>
 
-      <div class="field">
-        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
-        <% errors_hash(resource, :name).each do |error_msg| %>
-          <p class="text-xs text-danger"><%= error_msg %></p>
-        <% end %>
-      </div>
+    <div class="field">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+      <% errors_hash(resource, :name).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
     </div>
   </div>
 
-  <div class="mb-4 row">
-    <label for="staticEmail" class="col-sm-2 col-form-label">メールアドレス</label>
-    <div class="col-sm-10">
+  <div class="mb-4 w-75 center-block">
+    <label for="staticEmail">メールアドレス</label>
 
-      <div class="field">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-        <% errors_hash(resource, :email).each do |error_msg| %>
-          <p class="text-xs text-danger"><%= error_msg %></p>
-        <% end %>
-      </div>
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      <% errors_hash(resource, :email).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
     </div>
   </div>
 
-  <div class="mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">場所</label>
-    <div class="col-sm-10">
+  <div class="mb-5 w-75 center-block">
+    <label for="inputtext">場所</label>
 
-      <div class="field">
-        <%= f.text_field :location, autofocus: true, class: 'form-control' %>
-        <% errors_hash(resource, :location).each do |error_msg| %>
-          <p class="text-xs text-danger"><%= error_msg %></p>
-        <% end %>
-      </div>
+    <div class="field">
+      <%= f.text_field :location, autofocus: true, class: 'form-control' %>
+      <% errors_hash(resource, :location).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
     </div>
   </div>
 
-  <div class="mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">お店の紹介文</label>
-    <div class="col-sm-10">
-  
-      <div class="field">
-        <%= f.text_area :introduction, autofocus: true, class: 'form-control' %>
-      </div>
+  <div class="mb-5 w-75 center-block">
+    <label for="inputtext">お店の紹介文</label>
+
+    <div class="field">
+      <%= f.text_area :introduction, autofocus: true, class: 'form-control' %>
     </div>
   </div>
 
 
-  <div class="image mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">写真</label>
-    <div class="col-sm-10">
+  <div class="image mb-5 w-75 center-block">
+    <label for="inputtext">写真</label>
 
-      <div class="field">
-        <%= f.file_field :portraits, multiple: true, class: 'form-control' %>
-      </div>
+    <div class="field">
+      <%= f.file_field :portraits, multiple: true, class: 'form-control' %>
     </div>
   </div>
 
@@ -72,51 +62,45 @@
   <% end %>
 
 
-  <div class="mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">パスワードの変更</label>
-    <div class="col-sm-10">
-      <div class="field">
-        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-        <% if @minimum_password_length %>
+  <div class="mb-5 w-75 center-block">
+    <label for="inputtext">パスワードの変更</label>
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      <% if @minimum_password_length %>
         <%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %>
       <% end %>
-      </div>
     </div>
   </div>
 
-  <div class="mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">パスワードの確認</label>
-    <div class="col-sm-10">
-      <div class="field">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-      </div>
+  <div class="mb-5 w-75 center-block">
+    <label for="inputtext">パスワードの確認</label>
+    <div class="field">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
     </div>
   </div>
 
-<font face="MS ゴシック">
-<h6><%= t('更新する内容がある場合はパスワードを入力してください') %></h6>
-</font>
-  <div class="mb-5 row">
-    <label for="inputtext" class="col-sm-2 col-form-label">現在のパスワード</label>
-    <div class="col-sm-10">
-      <div class="field">
-        <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
-        <% errors_hash(resource, :current_password).each do |error_msg| %>
-          <p class="text-xs text-danger"><%= error_msg %></p>
-        <% end %>
-      </div>
+  <font face="MS ゴシック">
+    <h6 class="w-75 center-block"><%= t('更新する内容がある場合はパスワードを入力してください') %></h6>
+  </font>
+  <div class="mb-5 w-75 center-block">
+    <label for="inputtext">現在のパスワード</label>
+    <div class="field">
+      <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+      <% errors_hash(resource, :current_password).each do |error_msg| %>
+        <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
     </div>
   </div>
 
 
   <div class="actions text-center">
-    <%= f.submit t('.update'), class: 'btn btn-primary w-25'%>
+    <%= f.submit t('.update'), class: 'btn btn-primary w-25' %>
   </div>
 <% end %>
 <br>
 
 <font face="osaka">
-<h5 class="text-center"><%= t('退会') %></h5>
+  <h5 class="text-center"><%= t('退会') %></h5>
 </font>
 
 <div class="text-center mb-4">
