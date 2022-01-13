@@ -2,7 +2,7 @@ class KitchencarsController < ApplicationController
   before_action :exist_kitchencar, only: [:show]
 
   def show
-    @microposts = @kitchencar.microposts
+    @microposts = @kitchencar.microposts.page(params[:page]).per(15)
   end
 
   def index

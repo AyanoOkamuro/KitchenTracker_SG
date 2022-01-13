@@ -71,3 +71,5 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'aws-sdk-s3'
 gem 'dotenv-rails'
+
+gem 'kaminari'
