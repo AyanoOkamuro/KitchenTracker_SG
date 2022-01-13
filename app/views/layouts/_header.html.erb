@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">KitchenTracker</a>
     <button type="button" class="navbar-toggler justify-content-end" data-bs-toggle="collapse" data-bs-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
-      <span class="navbar-toggler-icon"></span>
+      <span class="fas fa-bars"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="Navber">
@@ -26,61 +26,6 @@
           </li>
         <% end %>
       </ul>
-<!--      <form class="d-flex">-->
-<!--        <input type="search" class="form-control me-2" placeholder="検索..." aria-label="検索...">-->
-<!--        <button type="submit" class="btn btn-outline-success flex-shrink-0">検索</button>-->
-<!--      </form>-->
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
-
-<!--<header>-->
-  <!-- Navbar -->
-<!--  <nav class="navbar navbar-expand-sm navbar-light bg-white">-->
-<!--    <div class="container-fluid">-->
-<!--      <button-->
-<!--              class="navbar-toggler"-->
-<!--              type="button"-->
-<!--              data-mdb-toggle="collapse"-->
-<!--              data-mdb-target="#navbarExample01"-->
-<!--              aria-controls="navbarExample01"-->
-<!--              aria-expanded="false"-->
-<!--              aria-label="Toggle navigation"-->
-<!--      >-->
-<!--        <i class="fas fa-bars"></i>-->
-<!--      </button>-->
-<!--      <div class="collapse navbar-collapse" id="navbarExample01">-->
-<!--        <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-<!--          <li class="nav-item active">-->
-            <%#= link_to 'home', root_path, class: "nav-link" %>
-<!--          </li>-->
-          <%# if current_kitchencar %>
-<!--            <li class="nav-item">-->
-              <%#= link_to "profile", kitchencar_path(current_kitchencar), class: "nav-link" %>
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-              <%#= link_to "logout", destroy_kitchencar_session_path, method: :delete, class: "nav-link" %>
-<!--            </li>-->
-          <%# else %>
-<!--            <li class="nav-item">-->
-              <%#= link_to "sign up", new_kitchencar_registration_path, class: "nav-link" %>
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-              <%#= link_to "login", new_kitchencar_session_path, class: "nav-link" %>
-<!--            </li>-->
-          <%# end %>
-<!--        </ul>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </nav>-->
-<!--</header>-->
-
-<%#= link_to 'home', root_path %>
-<%# if current_kitchencar %>
-  <%#= link_to "logout", destroy_kitchencar_session_path, method: :delete %>
-  <%#= link_to "profile", kitchencar_path(current_kitchencar) %>
-<%# else %>
-  <%#= link_to "sign up", new_kitchencar_registration_path %>
-  <%#= link_to "login", new_kitchencar_session_path %>
-<%# end %>
-<%#= link_to "post", microposts_path %>

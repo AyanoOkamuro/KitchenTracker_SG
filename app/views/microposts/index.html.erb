@@ -10,7 +10,6 @@
           <% else %>
             <%= image_tag "no_image.jpg", class: 'card-img-top' %>
           <% end %>
-
         <% end %>
         <div class="card-body">
           <%= link_to "#{micropost.kitchencar.name}", kitchencar_path(micropost.kitchencar.id), class: 'card-title' %>
