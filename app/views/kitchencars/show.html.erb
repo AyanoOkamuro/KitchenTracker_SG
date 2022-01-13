@@ -10,12 +10,10 @@
   </div>
 
   <div id="Header" class="border-bottom border-secondary mb-4">
-    <font size="5" face="Osaka">
+    <font size="7" face="Osaka">
       <%= @kitchencar.name %>
     </font>
   </div>
-
-  <div hidden>写真：</div>
 
   <div id="carouselExampleIndicators" class="carousel slide mb-5" data-mdb-ride="carousel">
     <div class="carousel-inner">
@@ -53,14 +51,48 @@
     </button>
   </div>
 
-  <h4 class="mb-6"><b><%= @kitchencar.introduction %></b></h4>
+  <h3 class="mb-6"><%= @kitchencar.introduction %></h3>
 
-  <div class="mb-4">
-    <%= link_to 'メニューはこちら', kitchencar_menus_path(@kitchencar), class: 'btn btn-primary' %>
+  <h3>メニュー (<%= @kitchencar.menus.count %>)</h3>
+  <div class="row row-cols-2 row-cols-md-3 g-4 mb-4">
+    <% @menus.each do |menu| %>
+      <div class="col">
+        <div class="card h-100">
+          <% if menu.image.attached? %>
+            <%= image_tag menu.image.variant(resize: '1200x1000!').processed, class: 'card-img-top' %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: 'card-img-top' %>
+          <% end %>
+          <div class="card-body">
+            <div class="card-title" style="font-size: 22px;">
+              <%= menu.name %>
+            </div>
+            <p class="card-text" style="font-size: 20px">
+              <%= menu.price %>円
+            </p>
+            <p class="card-text" style="font-size: 18px;">
+              <%= menu.description %>
+            </p>
+            <% if current_kitchencar && params[:kitchencar_id] == current_kitchencar.id.to_s %>
+              <%= link_to edit_kitchencar_menu_path(current_kitchencar, menu) do%>
+                <i class="far fa-edit fa-lg text-dark"></i>
+              <% end %>
+              <%= link_to kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" } do %>
+                <i class="far fa-trash-alt fa-lg text-dark"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-4 text-right" style="font-size: 18px;">
+    <%= link_to 'すべてのメニューはこちら >>', kitchencar_menus_path(@kitchencar) %>
   </div>
 
   <% if @kitchencar.microposts.any? %>
-    <h4>投稿 (<%= @kitchencar.microposts.count %>)</h4>
+    <h3>投稿 (<%= @kitchencar.microposts.count %>)</h3>
     <div class="row row-cols-2 row-cols-md-3 g-4 mb-4">
       <% @microposts.each do |micropost| %>
         <div class="col">
