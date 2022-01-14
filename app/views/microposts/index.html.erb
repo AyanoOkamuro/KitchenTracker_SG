@@ -16,6 +16,7 @@
           <p class="card-text mt-2" style="font-size: 18px;">
             <%= micropost.content %>
           </p>
+          <div class="card-footer bg-transparent">
           <%= time_ago_in_words(micropost.created_at) %>前
           <span class="mx-3">
             <% if micropost.kitchencar == current_kitchencar %>
@@ -27,6 +28,7 @@
               <% end %>
             <% end %>
           </span>
+          </div>
         </div>
       </div>
     </div>

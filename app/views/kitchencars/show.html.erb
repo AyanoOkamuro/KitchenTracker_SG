@@ -74,7 +74,7 @@
               <%= menu.description %>
             </p>
             <% if current_kitchencar && params[:kitchencar_id] == current_kitchencar.id.to_s %>
-              <%= link_to edit_kitchencar_menu_path(current_kitchencar, menu) do%>
+              <%= link_to edit_kitchencar_menu_path(current_kitchencar, menu) do %>
                 <i class="far fa-edit fa-lg text-dark"></i>
               <% end %>
               <%= link_to kitchencar_menu_path(current_kitchencar, menu), method: :delete, data: { confirm: "削除しますか？" } do %>
@@ -108,17 +108,19 @@
               <p class="card-text" style="font-size: 18px;">
                 <%= micropost.content %>
               </p>
-              <%= time_ago_in_words(micropost.created_at) %>前
-              <span class="mx-3">
+              <div class="card-footer bg-transparent">
+                <%= time_ago_in_words(micropost.created_at) %>前
+                <span class="mx-3">
                 <% if micropost.kitchencar == current_kitchencar %>
                   <%= link_to edit_micropost_path(micropost), class: 'text-dark' do %>
                     <i class="far fa-edit fa-lg"></i>
                   <% end %>
-                  <%= link_to micropost_path(micropost), method: :delete, class: 'text-dark', data: { confirm: "削除しますか？" } do %>
+                    <%= link_to micropost_path(micropost), method: :delete, class: 'text-dark', data: { confirm: "削除しますか？" } do %>
                     <i class="far fa-trash-alt fa-lg"></i>
                   <% end %>
                 <% end %>
-              </span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
