@@ -24,7 +24,7 @@
 $ gem install bundler
 $ bundle config set --local without 'production'
 $ bundle install
-
+$ yarn install
 ```
 
 その後、データベースへのマイグレーションを実行します。
