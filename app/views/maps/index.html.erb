@@ -1,47 +1,69 @@
 <h3 class="border-bottom border-secondary">キッチンカーMAP</h3>
-<div id='map' class="center-block mb-4"></div>
+<div>
+  <div class="text-center mb-4">
+    <input id="address" type="textbox" placeholder="場所を入力してください" class="w-25">
+    <input type="button" class="btn btn-success" value="検索" onclick="codeAddress()">
+  </div>
 
-<style>
-    #map {
-        width: 100%;
-        padding: 0 0 100%;
-    }
-</style>
+  <div id='map' class="center-block mb-4"></div>
 
-<script>
-    let map
 
-    function initMap() {
-        geocoder = new google.maps.Geocoder()
+  <style>
+      #map {
+          width: 100%;
+          padding: 0 0 100%;
+      }
+  </style>
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 35.6803997, lng: 139.7690174},
-            zoom: 15
-        });
+  <script>
+      let map
 
-        <% @microposts.each do |micropost| %>
-        (function() {
-            let marker = create_marker({
-                position: {lat: <%= micropost.latitude %>, lng: <%= micropost.longitude %>},
-                map: map,
-            });
-            let infowindow = new google.maps.InfoWindow({
-                position: {lat: <%= micropost.latitude %>, lng: <%= micropost.longitude %>},
-                content: "<a href='<%= kitchencar_path(micropost.kitchencar.id) %>' target=”_blank” rel=”noopener”><%= micropost.kitchencar.name %></a>"
-            });
-            marker.addListener('click', function() {
-                infowindow.open(map, marker);
-            });
-        })();
-        <% end %>
-    }
+      function initMap() {
+          geocoder = new google.maps.Geocoder()
 
-    function create_marker(options) {
-        let m = new google.maps.Marker(options);
-        return m;
-    }
-</script>
+          map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: 35.6803997, lng: 139.7690174},
+              zoom: 15
+          });
 
+          <% @microposts.each do |micropost| %>
+          (function () {
+              let marker = create_marker({
+                  position: {lat: <%= micropost.latitude %>, lng: <%= micropost.longitude %>},
+                  map: map,
+              });
+              let infowindow = new google.maps.InfoWindow({
+                  position: {lat: <%= micropost.latitude %>, lng: <%= micropost.longitude %>},
+                  content: "<a href='<%= kitchencar_path(micropost.kitchencar.id) %>' target=”_blank” rel=”noopener”><%= micropost.kitchencar.name %></a>"
+              });
+              marker.addListener('click', function () {
+                  infowindow.open(map, marker);
+              });
+          })();
+          <% end %>
+      }
+
+      let geocoder
+
+
+      function codeAddress() {
+          let inputAddress = document.getElementById('address').value;
+
+          geocoder.geocode({'address': inputAddress}, function (results, status) {
+              if (status == 'OK') {
+                  map.setCenter(results[0].geometry.location);
+              } else {
+                  alert('該当する結果がありませんでした：' + status);
+              }
+          });
+      }
+
+      function create_marker(options) {
+          let m = new google.maps.Marker(options);
+          return m;
+      }
+  </script>
+</div>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 
 
