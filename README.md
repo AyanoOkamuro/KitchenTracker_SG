@@ -1,24 +1,17 @@
-# README
+# KitchenTracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+地域のキッチンカー運営者による情報発信サイトです。キッチンカーをお探しの方は会員登録不要でご利用可能です。
+キッチンカーの投稿やMAP検索で、近くのお気に入りのお店を見つけることができます。
 
-Things you may want to cover:
+### サイトテーマ
+キッチンカー運営者による情報発信サイト
 
-* Ruby version
+### テーマを選んだ理由
+キッチンカーを運営する人たちはinstagramやFacebookでの発信がほとんどで、キッチンカー版食べログのようなものはまだ世の中になかったため、新規性があると思ったからです。
+また、twitterのように気軽に情報を発信する機能をつけることで付加価値を生み出せると思ったからです。
 
-* System dependencies
+### ターゲットユーザ
+- キッチンカーを運営する方。
+- キッチンカーを利用する方。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
