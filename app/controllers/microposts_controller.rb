@@ -19,12 +19,22 @@ class MicropostsController < ApplicationController
   end
 
   def create
+    @initial_latitude = if current_kitchencar.microposts.first
+                          current_kitchencar.microposts.first.latitude
+                        else
+                          35.6803997
+                        end
+    @initial_longitude = if current_kitchencar.microposts.first
+                           current_kitchencar.microposts.first.longitude
+                         else
+                           139.7690174
+                         end
     @micropost = current_kitchencar.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "つぶやきました!"
       redirect_to microposts_path
     else
-      @microposts = Micropost.all
+      @microposts = Micropost.page(params[:page]).per(15)
       render 'microposts/index'
     end
   end
