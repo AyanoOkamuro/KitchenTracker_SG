@@ -15,3 +15,25 @@
 - キッチンカーを運営する方。
 - キッチンカーを利用する方。
 
+## 使い方
+
+このアプリケーションを動かす場合は、まずはリポジトリを手元にクローンしてください。
+その後、次のコマンドで必要になる RubyGems をインストールします。
+
+```
+$ gem install bundler -v 2.2.17
+$ bundle _2.2.17_ config set --local without 'production'
+$ bundle _2.2.17_ install
+```
+
+その後、データベースへのマイグレーションを実行します。
+
+```
+$ rails db:migrate
+```
+
+最後にRailsサーバーを立ち上げます。
+
+```
+$ rails server
+```
