@@ -58,7 +58,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "削除しました!"
-    redirect_to request.referrer || microposts_path
+    redirect_to microposts_path
   end
 
   private
