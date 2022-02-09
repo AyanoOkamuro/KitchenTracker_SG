@@ -3,7 +3,7 @@ class MicropostsController < ApplicationController
 
   def index
     @micropost = Micropost.new
-    @microposts = Micropost.page(params[:page]).per(15)
+    @microposts = Micropost.with_attached_images.page(params[:page]).per(15)
     if current_kitchencar
       @initial_latitude = if current_kitchencar.microposts.first
                            current_kitchencar.microposts.first.latitude
@@ -34,7 +34,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "つぶやきました!"
       redirect_to microposts_path
     else
-      @microposts = Micropost.page(params[:page]).per(15)
+      @microposts = Micropost.with_attached_images.page(params[:page]).per(15)
       render 'microposts/index'
     end
   end
@@ -58,7 +58,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "削除しました!"
-    redirect_to request.referrer || microposts_path
+    redirect_to microposts_path
   end
 
   private

@@ -16,7 +16,7 @@ class MenusController < ApplicationController
   end
 
   def index
-    @menus = Menu.where(kitchencar_id: params[:kitchencar_id])
+    @menus = Menu.with_attached_image.where(kitchencar_id: params[:kitchencar_id])
   end
 
   def edit
